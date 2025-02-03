@@ -19,18 +19,23 @@ intents.guild_scheduled_events = True
 bot = discord.Client(intents=intents)
 scheduler = AsyncIOScheduler()
 
-# Flask server to keep Replit alive
+# Flask server to keep the bot alive
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def home():
-    return "Bot is running!"
+    return "Bot is running!", 200
 
-def run_server():
+def run():
     app.run(host="0.0.0.0", port=8080)
 
-# Start the Flask web server
-Thread(target=run_server).start()
+def keep_alive():
+    thread = Thread(target=run)
+    thread.daemon = True
+    thread.start()
+
+# Start the Flask server
+keep_alive()
 
 # Channels to schedule (open at 4 AM EST / 9 AM UTC, close at 8 PM EST / 1 AM UTC)
 SCHEDULED_CHANNELS = {
@@ -42,7 +47,7 @@ SCHEDULED_CHANNELS = {
     1103374763897933955: ("09:00", "01:00"),  # Alpha Support
     1090285346639585380: ("09:00", "01:00"),  # DIT Support
     1258065773717356574: ("09:00", "01:00"),  # IRIS Support
-    1336029284703408270: ("18:05", "18:10"),  # Test Channel (Opens at 12:05 CST / 18:05 UTC, Closes at 12:10 CST / 18:10 UTC)
+    1336029284703408270: ("15:15", "15:16"),  # Test Channel (Opens at 3:15 PM EST, Closes at 3:16 PM EST)
 }
 
 async def open_channel(channel_id):
