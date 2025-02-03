@@ -47,7 +47,7 @@ SCHEDULED_CHANNELS = {
     1103374763897933955: ("09:00", "01:00"),  # Alpha Support
     1090285346639585380: ("09:00", "01:00"),  # DIT Support
     1258065773717356574: ("09:00", "01:00"),  # IRIS Support
-    1336029284703408270: ("15:15", "15:39"),  # Test Channel (Opens at 3:15 PM EST, Closes at 3:39 PM EST)
+    1336029284703408270: ("15:15", "16:00"),  # Test Channel (Opens at 3:15 PM EST, Closes at 3:39 PM EST)
 }
 
 async def open_channel(channel_id):
